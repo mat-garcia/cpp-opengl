@@ -1,6 +1,9 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "external/imgui.h"
+#include "external/imgui_impl_glfw.h"
+#include "external/imgui_impl_opengl3.h"
 
 // Vertex Shader Source Code
 const char* vertexShaderSource = "#version 330 core\n"
@@ -12,9 +15,10 @@ const char* vertexShaderSource = "#version 330 core\n"
 
 const char* fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
+"uniform vec4 color;\n"
 "void main()\n"
 "{\n"
-"  FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
+"  FragColor = color;\n"
 "}\n\0";
 
 // Callback para ajustar a viewport quando a janela é redimensionada
@@ -55,6 +59,18 @@ int main() {
     // Configura a viewport
     glViewport(0, 0, 800, 800);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    // Setup ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    // Setup ImGui style
+    ImGui::StyleColorsDark();
+
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
 
     // Define os vertices do triângulo
     GLfloat vertices[] = {
@@ -128,24 +144,44 @@ int main() {
 
     // Loop principal
     while (!glfwWindowShouldClose(window)) {
-        // Limpa o buffer
+        // Processa eventos do ImGui
+        glfwPollEvents();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        // Criando a interface do usuário do ImGui
+        ImGui::Begin("Controles");
+        static ImVec4 triangleColor = ImVec4(0.8f, 0.3f, 0.02f, 1.0f);
+        ImGui::ColorEdit3("Cor do Triângulo", (float*)&triangleColor);
+        ImGui::End();
+
+        // Renderizando
         glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Usa o shader program e desenha o triângulo
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
+        glUniform4f(glGetUniformLocation(shaderProgram, "color"), triangleColor.x, triangleColor.y, triangleColor.z, triangleColor.w);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        // Troca os buffers e processa eventos
+        // Renderiza o ImGui
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        // Troca os buffers
         glfwSwapBuffers(window);
-        glfwPollEvents();
     }
 
     // Deleta os recursos
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteProgram(shaderProgram);
+
+    // Encerra o ImGui
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     // Fecha a janela
     glfwDestroyWindow(window);
