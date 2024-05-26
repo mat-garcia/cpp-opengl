@@ -15,4 +15,6 @@ estou doido pra ver a FuryEngine em execução.
 
 ### 2024-05-26
 
-- Ok openGl mostreme um triangulo na tela..... Opa.. Ola trigangulo :).
+- Ok openGl mostreme um triangulo na tela..... Opa.. Ola triangulo :).
+
+- implementando imgui e contolando a cor do triangulo em tempo de execucao.

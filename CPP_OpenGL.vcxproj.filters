@@ -21,5 +21,55 @@
     <ClCompile Include="main.cpp">
       <Filter>Arquivos de Recurso</Filter>
     </ClCompile>
+    <ClCompile Include="external\imgui.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui_demo.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui_draw.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui_impl_glfw.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui_impl_opengl3.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui_tables.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui_widgets.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="external\imconfig.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui_impl_glfw.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui_impl_opengl3.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui_impl_opengl3_loader.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui_internal.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imstb_rectpack.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imstb_textedit.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imstb_truetype.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
